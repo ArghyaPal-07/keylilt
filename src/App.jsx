@@ -13,18 +13,32 @@ import { AuthProvider } from "./utils/AuthContext";
 import NotFound from "./components/NotFound";
 import Setting from "./utils/Settings/Setting";
 import CodeType from "./components/CodeType";
+import { Analytics } from "@vercel/analytics/react";
 export default function App() {
-  return <Router><AuthProvider><Routes><Route path="/" element={<Layout />}>
-    <Route index element={<Landing />} />
-    <Route path="typing" element={<TypingBox />} />
-    <Route path="results" element={<Results />} />
-    <Route path="login" element={<Login />} />
-    <Route path="register" element={<Register />} />
-    <Route path="about" element={<About />} />
-    <Route path="layout" element={<Layout />} />
-    <Route path="code" element={<CodeType />} />
-    <Route element={<PrivateRoutes />}><Route path="settings" element={<Setting />} /></Route>
-    <Route path="leaderboard" element={<Leaderboard />} />
-    <Route path="*" element={<NotFound />} />
-  </Route></Routes></AuthProvider></Router>;
+  return (
+    <>
+      <Router>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Landing />} />
+              <Route path="typing" element={<TypingBox />} />
+              <Route path="results" element={<Results />} />
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+              <Route path="about" element={<About />} />
+              <Route path="layout" element={<Layout />} />
+              <Route path="code" element={<CodeType />} />
+              <Route element={<PrivateRoutes />}>
+                <Route path="settings" element={<Setting />} />
+              </Route>
+              <Route path="leaderboard" element={<Leaderboard />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </AuthProvider>
+      </Router>
+      <Analytics />
+    </>
+  );
 }
